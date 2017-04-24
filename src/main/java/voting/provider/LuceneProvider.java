@@ -30,8 +30,7 @@ public class LuceneProvider implements VoterProvider{
 		this.aggregatorFld = aggregatorFld;
 		this.searcher  = searcher;
 	}
-	
-	@Override
+
 	public Voter nextVoter() {
 		if  (!hasNext()){
 			return null;
@@ -49,7 +48,6 @@ public class LuceneProvider implements VoterProvider{
 		
 	}
 
-	@Override
 	public boolean hasNext() {
 		if (next == -1 ) return false;
 		if (next >= rankedDocument.scoreDocs.length) return false;
@@ -57,7 +55,6 @@ public class LuceneProvider implements VoterProvider{
 		
 	}
 
-	@Override
 	public int size() {
 		return rankedDocument.scoreDocs.length;
 	}

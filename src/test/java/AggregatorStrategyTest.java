@@ -1,7 +1,8 @@
-package tests;
-
 import static org.junit.Assert.*;
 
+import helpers.StatsHelper;
+import org.apache.commons.math3.stat.StatUtils;
+import org.apache.commons.math3.stat.descriptive.DescriptiveStatistics;
 import voting.Aggregator;
 import voting.VotingModel;
 import voting.provider.AggregatorProvider;
@@ -29,7 +30,7 @@ import java.util.Map;
 import org.junit.Before;
 import org.junit.Test;
 
-import flanagan.analysis.Stat;
+
 
 public class AggregatorStrategyTest {
 
@@ -133,9 +134,9 @@ public class AggregatorStrategyTest {
 			result.put(aggregator.id, aggregator.score);
 		}
 		
-		assertEquals("1", Stat.mean(d1), result.get("1"),0.00); 
-		assertEquals("2", Stat.mean(d2), result.get("2"),0.00);
-		assertEquals("3", Stat.mean(d3), result.get("3"),0.00);
+		assertEquals("1", StatUtils.mean(d1), result.get("1"),0.00);
+		assertEquals("2", StatUtils.mean(d2), result.get("2"),0.00);
+		assertEquals("3", StatUtils.mean(d3), result.get("3"),0.00);
 	}
 	
 	
@@ -207,10 +208,10 @@ public class AggregatorStrategyTest {
 		for (Aggregator aggregator : model.vote(new CombMEDConceretStrategy())) {
 			result.put(aggregator.id, aggregator.score);
 		}
-		
-		assertEquals("1", Stat.median(d1), result.get("1"),0.00); 
-		assertEquals("2", Stat.median(d2), result.get("2"),0.00);
-		assertEquals("3", Stat.median(d3), result.get("3"),0.00);
+
+		assertEquals("1", StatsHelper.median(d1), result.get("1"),0.00);
+		assertEquals("2", StatsHelper.median(d2), result.get("2"),0.00);
+		assertEquals("3", StatsHelper.median(d3), result.get("3"),0.00);
 	}
 	
 	

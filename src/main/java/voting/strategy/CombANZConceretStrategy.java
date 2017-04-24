@@ -1,18 +1,18 @@
 package voting.strategy;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import voting.AggregationStrategy;
 import voting.Voter;
 import voting.VoterProvider;
 
-import java.util.HashMap;
-import java.util.Map;
+public class CombANZConceretStrategy implements AggregationStrategy {
 
-public class CombMNZConceretStrategy implements AggregationStrategy{
 
-	@Override
 	public Map<String, Double> aggregate(VoterProvider provider) {
-		Map<String, Double> scoresMap = new HashMap<>();
-		Map<String,Integer> countsMap = new HashMap<>();
+		Map<String, Double> scoresMap = new HashMap();
+		Map<String,Integer> countsMap = new HashMap();
 		
 		while(provider.hasNext())
 		{
@@ -35,7 +35,7 @@ public class CombMNZConceretStrategy implements AggregationStrategy{
 		}
 		
 		for (String key : scoresMap.keySet()){
-			scoresMap.put(key, scoresMap.get(key) * countsMap.get(key));
+			scoresMap.put(key, scoresMap.get(key)/countsMap.get(key));
 		}
 		
 	  return scoresMap;

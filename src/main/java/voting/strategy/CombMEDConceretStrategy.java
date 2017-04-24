@@ -9,25 +9,23 @@ import java.util.Map;
 
 
 
-import flanagan.analysis.Stat;
-
-
+import org.apache.commons.math3.stat.descriptive.DescriptiveStatistics;
 import voting.AggregationStrategy;
 import voting.Voter;
 import voting.VoterProvider;
 
 public class CombMEDConceretStrategy implements AggregationStrategy {
 
-	@Override
+	DescriptiveStatistics descriptiveStatistics = new DescriptiveStatistics();
 	public Map<String, Double> aggregate(VoterProvider provider) {
-		Map<String, List<Double>> scoreListMap = new HashMap<>();
+		Map<String, List<Double>> scoreListMap = new HashMap();
 		
 		
 		while(provider.hasNext())
 		{
 			Voter voter = provider.nextVoter();
 			String parentId = voter.aggregatorID;
-			List<Double> scoreList = new LinkedList<>();
+			List<Double> scoreList = new LinkedList<Double>();
 			
 			if (scoreListMap.containsKey(parentId))
 			{
@@ -38,10 +36,11 @@ public class CombMEDConceretStrategy implements AggregationStrategy {
 			scoreListMap.put(parentId, scoreList);
 		}
 		
-		Map<String, Double> scoresMap = new HashMap<>();
+		Map<String, Double> scoresMap = new HashMap();
 		
 		for (String key : scoreListMap.keySet()){
-			scoresMap.put(key, Stat.median(CollectionHelper.convert(scoreListMap.get(key).toArray(new Double[1]))));
+			descriptiveStatistics = new DescriptiveStatistics(CollectionHelper.convert(scoreListMap.get(key).toArray(new Double[1])));
+			scoresMap.put(key, descriptiveStatistics.getPercentile(50));
 		}
 		
 	  return scoresMap;

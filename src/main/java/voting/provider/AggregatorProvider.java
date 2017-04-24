@@ -22,8 +22,7 @@ public class AggregatorProvider implements VoterProvider{
 		next = (aggregators.length>=0)?0:-1;
 		this.aggregators = aggregators;
 	}
-	
-	@Override
+
 	public Voter nextVoter() {
 		if  (!hasNext()){
 			return null;
@@ -32,7 +31,6 @@ public class AggregatorProvider implements VoterProvider{
 		return new Voter(next+1,(float)aggregators[next].score, aggregators[next++].id );
 	}
 
-	@Override
 	public boolean hasNext() {
 		
 		if (aggregators == null || next < 0 || next >= aggregators.length){ 
@@ -42,13 +40,11 @@ public class AggregatorProvider implements VoterProvider{
 		}	
 	}
 
-	@Override
 	public int size() {
 		return aggregators.length;
 		
 	}
 
-	@Override
 	public Map<String, List<String>> groupVoters() {
 		// TODO Auto-generated method stub
 		return null;

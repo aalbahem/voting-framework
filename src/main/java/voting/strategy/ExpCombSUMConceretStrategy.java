@@ -1,19 +1,17 @@
 package voting.strategy;
 
-import voting.AggregationStrategy;
-import voting.Voter;
-import voting.VoterProvider;
-
 
 import java.util.HashMap;
 import java.util.Map;
 
+import voting.AggregationStrategy;
+import voting.Voter;
+import voting.VoterProvider;
 
-public class CombSUMConceretStrategy implements AggregationStrategy{
+public class ExpCombSUMConceretStrategy implements AggregationStrategy {
 
-	@Override
 	public Map<String, Double> aggregate(VoterProvider provider) {
-		Map<String, Double> scores = new HashMap<>();
+		Map<String, Double> scores = new HashMap();
 		
 		while(provider.hasNext())
 		{
@@ -27,13 +25,13 @@ public class CombSUMConceretStrategy implements AggregationStrategy{
 				parentScore = scores.get(parentId);
 			}
 			
-			parentScore += voter.score;
+			parentScore += Math.exp(voter.score);
 			
 			scores.put(parentId, parentScore);
 		}
 		
 	  return scores;
-	}
 
+	}
 
 }

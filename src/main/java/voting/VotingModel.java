@@ -21,7 +21,7 @@ public class VotingModel {
 	{
 		Map<String, Double> results = aggregationStrategy.aggregate(this.voterProvider);
 		
-		ArrayList<Aggregator>aggregators = new ArrayList<>();
+		ArrayList<Aggregator>aggregators = new ArrayList();
 		int i = 0;
 		
 		for (Map.Entry<String, Double> entry : results.entrySet())

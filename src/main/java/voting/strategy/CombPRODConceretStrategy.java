@@ -9,10 +9,9 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class CombPRODConceretStrategy implements AggregationStrategy{
-	
-	@Override
+
 	public Map<String, Double> aggregate(VoterProvider provider) {
-		Map<String, Double> scores = new HashMap<>();
+		Map<String, Double> scores = new HashMap();
 		
 		while(provider.hasNext())
 		{

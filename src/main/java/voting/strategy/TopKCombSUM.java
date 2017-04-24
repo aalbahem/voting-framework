@@ -18,11 +18,10 @@ public class TopKCombSUM implements AggregationStrategy{
 	public TopKCombSUM(int k) {
 	  this.k = k;
 	}
-	
-	@Override
+
 	public Map<String, Double> aggregate(VoterProvider provider) {
-		Map<String, Double> scoresMap = new HashMap<>();
-		Map<String,Integer> countsMap = new HashMap<>();
+		Map<String, Double> scoresMap = new HashMap();
+		Map<String,Integer> countsMap = new HashMap();
 		
 		while(provider.hasNext())
 		{

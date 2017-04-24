@@ -4,14 +4,15 @@ import voting.AggregationStrategy;
 import voting.Voter;
 import voting.VoterProvider;
 
+
 import java.util.HashMap;
 import java.util.Map;
 
-public class CombRRConceretStrategy implements AggregationStrategy{
-	
-	@Override
+
+public class CombSUMConceretStrategy implements AggregationStrategy{
+
 	public Map<String, Double> aggregate(VoterProvider provider) {
-		Map<String, Double> scores = new HashMap<>();
+		Map<String, Double> scores = new HashMap();
 		
 		while(provider.hasNext())
 		{
@@ -25,7 +26,7 @@ public class CombRRConceretStrategy implements AggregationStrategy{
 				parentScore = scores.get(parentId);
 			}
 			
-			parentScore += (1.0/voter.rank);
+			parentScore += voter.score;
 			
 			scores.put(parentId, parentScore);
 		}

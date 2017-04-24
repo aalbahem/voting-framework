@@ -10,10 +10,9 @@ import voting.VoterProvider;
 public class CombGNZConceretStrategy implements AggregationStrategy{
 
 
-	@Override
 	public Map<String, Double> aggregate(VoterProvider provider) {
-		Map<String, Double> scoresMap = new HashMap<>();
-		Map<String,Integer> countsMap = new HashMap<>();
+		Map<String, Double> scoresMap = new HashMap();
+		Map<String,Integer> countsMap = new HashMap();
 		
 		while(provider.hasNext())
 		{
